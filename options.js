@@ -6,18 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.sync.get('keyBindings', (data) => {
         const keyBindings = data.keyBindings || {
             switchNextModifier: 'none',
-            switchNextKey: 'd',
+            switchNextKey: 'D',
             switchPreviousModifier: 'none',
-            switchPreviousKey: 'a',
+            switchPreviousKey: 'A',
             forwardReplayModifier: 'none',
-            forwardReplayKey: 'f',
+            forwardReplayKey: 'F',
             deleteActionModifier: 'none',
-            deleteActionKey: 's',
+            deleteActionKey: 'S',
             goToCustomIntervalModifier: 'none',
-            goToCustomIntervalKey: 'g',
+            goToCustomIntervalKey: 'G',
             goToCustomIntervalValue: '15',
             horizontalLineModifier: 'none',
-            horizontalLineKey: 'h',
+            horizontalLineKey: 'H',
             mouseControl: false,
             featuresEnabled: true
         };
@@ -41,6 +41,48 @@ document.addEventListener('DOMContentLoaded', () => {
         statusElement.textContent = keyBindings.featuresEnabled ? 'Tiện ích đang bật' : 'Tiện ích đang tắt';
     });
 
+    // Function to enforce single uppercase letter or digit input
+    function enforceSingleUppercaseOrDigitInput(event) {
+        let input = event.target;
+        let value = input.value.toUpperCase();
+        
+        // Remove non-alphanumeric characters
+        value = value.replace(/[^A-Z0-9]/g, '');
+        
+        // Update the input value to only the first character
+        input.value = value.slice(0, 1); // Ensure only one character
+    }
+
+    // Function to enforce 2-character alphanumeric input
+    function enforceTwoCharacterAlphanumericInput(event) {
+        let input = event.target;
+        let value = input.value.toUpperCase();
+        
+        // Remove non-alphanumeric characters
+        value = value.replace(/[^A-Z0-9]/g, '');
+        
+        // Update the input value to only the first 2 characters
+        input.value = value.slice(0, 2); // Ensure only two characters
+    }
+
+    // Apply input enforcement to all relevant fields
+    const keyInputs = [
+        'switchNextKey',
+        'switchPreviousKey',
+        'forwardReplayKey',
+        'deleteActionKey',
+        'goToCustomIntervalKey',
+        'horizontalLineKey'
+    ];
+
+    keyInputs.forEach(id => {
+        document.getElementById(id).addEventListener('input', enforceSingleUppercaseOrDigitInput);
+    });
+
+    // Apply input enforcement to goToCustomIntervalValue
+    const intervalInput = document.getElementById('goToCustomIntervalValue');
+    intervalInput.addEventListener('input', enforceTwoCharacterAlphanumericInput);
+
     // Handle form submission
     optionsForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -61,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
             horizontalLineKey: document.getElementById('horizontalLineKey').value,
             mouseControl: document.getElementById('mouseControl').checked,
             featuresEnabled: document.getElementById('featuresEnabled').checked,
-            // featuresEnabled: true // Assuming features are enabled by default, or set based on user input
         };
 
         // Save to chrome.storage.sync

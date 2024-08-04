@@ -3,18 +3,18 @@
 
     let keyBindings = {
         switchNextModifier: 'none',
-        switchNextKey: 'd',
+        switchNextKey: 'D',
         switchPreviousModifier: 'none',
-        switchPreviousKey: 'a',
+        switchPreviousKey: 'A',
         forwardReplayModifier: 'none',
-        forwardReplayKey: 'f',
+        forwardReplayKey: 'F',
         deleteActionModifier: 'none',
-        deleteActionKey: 's',
+        deleteActionKey: 'S',
         goToCustomIntervalModifier: 'none',
-        goToCustomIntervalKey: 'g',
+        goToCustomIntervalKey: 'G',
         goToCustomIntervalValue: '15',
         horizontalLineModifier: 'none',
-        horizontalLineKey: 'h',
+        horizontalLineKey: 'H',
         mouseControl: false,
         featuresEnabled: true
     };
@@ -77,7 +77,7 @@
                     return;
                 }
 
-                const key = e.key.toLowerCase();
+                const key = e.key.toUpperCase();
                 const ctrlKey = e.ctrlKey ? 'ctrl' : 'none';
                 const altKey = e.altKey ? 'alt' : 'none';
                 const shiftKey = e.shiftKey ? 'shift' : 'none';

@@ -26,6 +26,13 @@
             margin-bottom: 20px;
         }
 
+        .note {
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
         form {
             display: flex;
             flex-direction: column;
@@ -81,7 +88,8 @@
 </head>
 <body>
     <h1>Phím Tắt Tùy Chỉnh</h1>
-    <p id="status">F2 để bật/tắt</p>
+    <p id="status"></p>
+    <p class="note">F2 để bật/tắt nhanh</p>
     <form id="optionsForm">
         <button type="submit">Lưu</button>
         <label for="switchNext">Khung phải:</label>
@@ -143,7 +151,6 @@
             <label for="featuresEnabled">Bật tiện ích</label>
         </div>
 
-        
     </form>
 
     <script src="options.js"></script>
