@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Phím tắt tùy chỉnh cho TradingView",
+  "version": "0.2",
+  "author": "Hoang Nam",
+  "description": "Phím tắt tùy chỉnh TradingView cho tiện ích Chrome.",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "options.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.tradingview.com/chart/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
